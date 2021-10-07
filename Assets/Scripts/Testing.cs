@@ -60,11 +60,14 @@ public class Testing : MonoBehaviour
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
 
         transform.Translate(movement * speed * Time.deltaTime);
+    }
 
-       //if(Input.GetKeyDown(KeyCode.D))
-       // {
-       //     Debug.Log(Input.GetAxis("Horizontal"));
-       //     transform.Translate(Vector2.right * speed * Time.deltaTime);
-       // }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Blocky"))
+        {
+            Destroy(other.gameObject);
+            Debug.Log("Blocky works");
+        }
     }
 }
