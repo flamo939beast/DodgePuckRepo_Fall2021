@@ -9,6 +9,8 @@ public class Testing : MonoBehaviour
     public float speed = 10.0f;
     public GameObject Puck;
     public GameObject Blocky;
+    public GameObject scoreText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +70,8 @@ public class Testing : MonoBehaviour
         {
             Destroy(other.gameObject);
             Debug.Log("Blocky works");
+            Instantiate(Blocky, new Vector2(Random.Range(-xRange, xRange), Random.Range(-yRange, yRange)), Quaternion.identity);
+            scoreText.GetComponent<ScoreKeeper>().UpdateScore();
         }
     }
 }
