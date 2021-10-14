@@ -54,10 +54,10 @@ public class Testing : MonoBehaviour
         puckArray = GameObject.FindGameObjectsWithTag("Puck");
 
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        Debug.Log(moveHorizontal);
+        float moveHorizontal = Input.GetAxisRaw("Horizontal");
+        //Debug.Log(moveHorizontal);
 
-        float moveVertical = Input.GetAxis("Vertical");
+        float moveVertical = Input.GetAxisRaw("Vertical");
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
 
@@ -69,9 +69,16 @@ public class Testing : MonoBehaviour
         if (other.gameObject.CompareTag("Blocky"))
         {
             Destroy(other.gameObject);
-            Debug.Log("Blocky works");
+            //Debug.Log("Blocky works");
             Instantiate(Blocky, new Vector2(Random.Range(-xRange, xRange), Random.Range(-yRange, yRange)), Quaternion.identity);
+            Instantiate(Puck, new Vector2(Random.Range(-xRange, xRange), Random.Range(-yRange, yRange)), Quaternion.identity);
+
             scoreText.GetComponent<ScoreKeeper>().UpdateScore();
+        }
+
+        if (other.gameObject.CompareTag("Puck"))
+        {
+            Time.timeScale = 0;
         }
     }
 }
