@@ -10,6 +10,8 @@ public class Testing : MonoBehaviour
     public GameObject Puck;
     public GameObject Blocky;
     public GameObject scoreText;
+    public GameObject gameOverText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +49,13 @@ public class Testing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       if (Input.GetKeyDown(KeyCode.N))
+        {
+            GameObject[] allPucks = GameObject.FindGameObjectsWithTag("Puck");
+            foreach (GameObject dude in allPucks)
+                GameObject.Destroy(dude);
+        }
+        
         //Instantiate(Puck,new Vector2(Random.Range(-xRange,xRange), Random.Range(-yRange, yRange)) , Quaternion.identity);
 
         //Count how many enemies are in the scene
@@ -78,7 +87,14 @@ public class Testing : MonoBehaviour
 
         if (other.gameObject.CompareTag("Puck"))
         {
+            gameOverText.SetActive(true);
             Time.timeScale = 0;
         }
+    }
+
+    public void NewGame()
+    {
+        Debug.Log("It's A New Game"); 
+
     }
 }
