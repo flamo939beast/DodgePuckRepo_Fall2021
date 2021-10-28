@@ -49,12 +49,7 @@ public class Testing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.N))
-        {
-            GameObject[] allPucks = GameObject.FindGameObjectsWithTag("Puck");
-            foreach (GameObject dude in allPucks)
-                GameObject.Destroy(dude);
-        }
+       
         
         //Instantiate(Puck,new Vector2(Random.Range(-xRange,xRange), Random.Range(-yRange, yRange)) , Quaternion.identity);
 
@@ -82,6 +77,7 @@ public class Testing : MonoBehaviour
             Instantiate(Blocky, new Vector2(Random.Range(-xRange, xRange), Random.Range(-yRange, yRange)), Quaternion.identity);
             Instantiate(Puck, new Vector2(Random.Range(-xRange, xRange), Random.Range(-yRange, yRange)), Quaternion.identity);
 
+            scoreText.GetComponent<ScoreKeeper>().scoreValue += 5;
             scoreText.GetComponent<ScoreKeeper>().UpdateScore();
         }
 
@@ -94,7 +90,24 @@ public class Testing : MonoBehaviour
 
     public void NewGame()
     {
-        Debug.Log("It's A New Game"); 
+        //destroy all pucks
+        Debug.Log("It's A New Game");
+        GameObject[] allPucks = GameObject.FindGameObjectsWithTag("Puck");
+        foreach (GameObject dude in allPucks)
+            GameObject.Destroy(dude);
+        //destroy all blockys
+        GameObject[] allBlockys = GameObject.FindGameObjectsWithTag("Blocky");
+        foreach (GameObject dude in allBlockys)
+            GameObject.Destroy(dude);
+        //teleport to the origin
+        transform.position = new Vector2(0, 0);
+        Instantiate(Blocky, new Vector2(Random.Range(-xRange, xRange), Random.Range(-yRange, yRange)), Quaternion.identity);
+        Instantiate(Puck, new Vector2(Random.Range(-xRange, xRange), Random.Range(-yRange, yRange)), Quaternion.identity);
+        //resume the time
+        gameOverText.SetActive(false);
+        Time.timeScale = 1;
 
+        //Set score to zero when restart
+        scoreText.GetComponent<ScoreKeeper>().scoreValue = 0;
     }
 }
