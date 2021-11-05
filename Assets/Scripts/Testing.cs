@@ -91,7 +91,7 @@ public class Testing : MonoBehaviour
     public void NewGame()
     {
         //destroy all pucks
-        Debug.Log("It's A New Game");
+        //Debug.Log("It's A New Game");
         GameObject[] allPucks = GameObject.FindGameObjectsWithTag("Puck");
         foreach (GameObject dude in allPucks)
             GameObject.Destroy(dude);
